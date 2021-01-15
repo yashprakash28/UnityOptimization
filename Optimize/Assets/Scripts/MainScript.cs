@@ -50,7 +50,12 @@ public class MainScript : MonoBehaviour
         var uwr = new UnityWebRequest(url, "POST");
         uwr.uploadHandler = new UploadHandlerRaw(bytes);
         uwr.downloadHandler = new DownloadHandlerBuffer();
-        uwr.SetRequestHeader("Content-Type", "image/jpeg");
+
+        List<IMultipartFormSection> formData = new List<IMultipartFormSection>();
+        formData.Add(new MultipartFormSection("image", file));
+        uwr.Post(url, formData);
+
+        // uwr.SetRequestHeader("Content-Type", "image/jpeg");
         // uwr.GetRequestHeader("image");
 
         yield return uwr.SendWebRequest();
