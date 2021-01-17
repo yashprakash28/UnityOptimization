@@ -13,6 +13,9 @@ public class MainScript : MonoBehaviour
 
     static WebCamTexture camera;
 
+    private const float API_CHECK_MAXTIME = 0.05f * 60.0f; //10 minutes
+    private float apiCheckCountdown = API_CHECK_MAXTIME;
+
     void Start()
     {
         if (camera == null)
@@ -28,10 +31,15 @@ public class MainScript : MonoBehaviour
         }
     }
 
-    // void Update()
-    // {
-       
-    // }
+    void Update()
+    {
+        apiCheckCountdown -= Time.deltaTime;
+        if (apiCheckCountdown <= 0)
+        {
+            sendRequest();
+            apiCheckCountdown = API_CHECK_MAXTIME;
+        }
+    }
 
     public void sendRequest()
     {
@@ -41,6 +49,7 @@ public class MainScript : MonoBehaviour
 
     IEnumerator request(Texture2D tex)
     {
+        Debug.Log("sending request");
         // Debug.Log("request");
         // WWW request = new WWW(url);
         // StartCoroutine(onResponse(request));
@@ -85,12 +94,12 @@ public class MainScript : MonoBehaviour
         // Upload to a cgi script    
         WWW w = new WWW(url, form);
         yield return w;
-        Debug.Log(w.text);
-        Debug.Log(w.bytes);
-        if (w.error != null)
-            print(w.error);    
-        else
-            print("Finished Uploading Screenshot"); 
+        Debug.Log("data" + w.text);
+        // Debug.Log(w.bytes);
+        // if (w.error != null)
+        //     print(w.error);    
+        // else
+        //     print("Finished Uploading Screenshot"); 
 
         // yield return null;
 
