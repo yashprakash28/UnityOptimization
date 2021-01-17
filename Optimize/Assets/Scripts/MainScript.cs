@@ -8,7 +8,8 @@ using UnityEngine.Networking;
 public class MainScript : MonoBehaviour
 {
 
-    string url = "http://ec2-13-59-115-87.us-east-2.compute.amazonaws.com:5000/getcoordinates";
+    // string url = "http://ec2-13-59-115-87.us-east-2.compute.amazonaws.com:5000/getcoordinates";
+    string url = "http://127.0.0.1:8000/getcoordinates";
 
     static WebCamTexture camera;
 
@@ -45,34 +46,53 @@ public class MainScript : MonoBehaviour
         // StartCoroutine(onResponse(request));
 
         byte[] bytes = tex.EncodeToJPG();
+        // Debug.Log(bytes.To);
+        // Debug.Log(tex);
 
-        string path = Application.persistentDataPath + "/Image" + System.DateTime.Now.ToString("HHmmss") + ".jpg";
-        File.WriteAllBytes(path, bytes);
-        Debug.Log(path);
+        // string path = Application.persistentDataPath + "/Image" + System.DateTime.Now.ToString("HHmmss") + ".jpg";
+        // File.WriteAllBytes(path, bytes);
+        // Debug.Log(path);
         Destroy(tex);
 
-        // UnityWebRequest uwr;
+                // var uwr = new UnityWebRequest(url, "POST");
+                // uwr.uploadHandler = new UploadHandlerRaw(bytes);
+                // uwr.downloadHandler = new DownloadHandlerBuffer();
 
-        List<IMultipartFormSection> formData = new List<IMultipartFormSection>();
-        formData.Add(new MultipartFormDataSection("image", path));
+                // uwr.SetRequestHeader("Content-Type", "image/jpeg");
+                // uwr.GetRequestHeader("image");
 
-        UnityWebRequest uwr = UnityWebRequest.Post(url, formData);
+                    // List<IMultipartFormSection> formData = new List<IMultipartFormSection>();
+                    // formData.Add(new MultipartFormDataSection("image", "image.jpg"));
+                // formData.AddBinaryData( new MultipartFormDataSection("image", bytes, "screenShot.png", "image/jpg") );
 
-        // var uwr = new UnityWebRequest(url, "POST");
-        // uwr.uploadHandler = new UploadHandlerRaw(bytes);
-        // uwr.downloadHandler = new DownloadHandlerBuffer();
+                    // UnityWebRequest uwr = UnityWebRequest.Post(url, formData); 
 
-        // uwr.SetRequestHeader("Content-Type", "image/jpeg");
-        // uwr.GetRequestHeader("image");
+                    // yield return uwr.SendWebRequest();
 
-        yield return uwr.SendWebRequest();
+                    // string response = uwr.downloadHandler.text;
 
-        string response = uwr.downloadHandler.text;
+                    // Debug.Log(response);
+                // Debug.Log(uwr.downloadHandler);
 
-        Debug.Log(response);
-        Debug.Log(uwr.downloadHandler);
+                // yield return null;
 
-        yield return null;
+            // Create a Web Form
+
+        var form = new WWWForm();
+        // form.AddField("frameCount", Time.frameCount.ToString());
+        form.AddBinaryData("file", bytes, "screenShot.jpg", "image/jpg");
+    
+        // Upload to a cgi script    
+        WWW w = new WWW(url, form);
+        yield return w;
+        Debug.Log(w.text);
+        Debug.Log(w.bytes);
+        if (w.error != null)
+            print(w.error);    
+        else
+            print("Finished Uploading Screenshot"); 
+
+        // yield return null;
 
     }
 
