@@ -9,31 +9,35 @@ public class MainScript : MonoBehaviour
 {
 
     // string url = "http://ec2-13-59-115-87.us-east-2.compute.amazonaws.com:5000/getcoordinates";
-    string url = "http://127.0.0.1:8000/getcoordinates";
+    // string url = "http://127.0.0.1:8000/getcoordinates";
+    string url = "https://ar-anatomy.herokuapp.com/getcoordinates";
 
     static WebCamTexture camera;
 
-    private const float API_CHECK_MAXTIME = 0.05f * 60.0f; //10 minutes
+    public TextMeshProUGUI apiData, countdown, status;
+
+    private const float API_CHECK_MAXTIME = 0.05f * 60.0f; //3 second
     private float apiCheckCountdown = API_CHECK_MAXTIME;
 
     void Start()
     {
-        if (camera == null)
-        {
-            camera = new WebCamTexture();
-        }
+        // if (camera == null)
+        // {
+        //     camera = new WebCamTexture();
+        // }
 
-        GetComponent<Renderer>().material.mainTexture = camera;
+        // GetComponent<Renderer>().material.mainTexture = camera;
 
-        if(!camera.isPlaying)
-        {
-            camera.Play();
-        }
+        // if(!camera.isPlaying)
+        // {
+        //     camera.Play();
+        // }
     }
 
     void Update()
     {
         apiCheckCountdown -= Time.deltaTime;
+        countdown.text = apiCheckCountdown.ToString();
         if (apiCheckCountdown <= 0)
         {
             sendRequest();
@@ -50,6 +54,7 @@ public class MainScript : MonoBehaviour
     IEnumerator request(Texture2D tex)
     {
         Debug.Log("sending request");
+        status.text = "sending request";
         // Debug.Log("request");
         // WWW request = new WWW(url);
         // StartCoroutine(onResponse(request));
@@ -89,12 +94,14 @@ public class MainScript : MonoBehaviour
 
         var form = new WWWForm();
         // form.AddField("frameCount", Time.frameCount.ToString());
-        form.AddBinaryData("file", bytes, "screenShot.jpg", "image/jpg");
-    
+        form.AddBinaryData("image", bytes, "screenShot.jpg", "image/jpg");
+        status.text = "binary data added";
         // Upload to a cgi script    
         WWW w = new WWW(url, form);
         yield return w;
+        status.text = "dataextracted";
         Debug.Log("data" + w.text);
+        apiData.text = "API Data" + w.text;
         // Debug.Log(w.bytes);
         // if (w.error != null)
         //     print(w.error);    
