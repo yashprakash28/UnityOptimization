@@ -53,20 +53,36 @@ public class MainScript : MonoBehaviour
 
     IEnumerator request(Texture2D tex)
     {
+        
         Debug.Log("sending request");
         status.text = "sending request";
+        byte[] bytes = tex.EncodeToJPG();
+        Destroy(tex);
+
+        var form = new WWWForm();
+        form.AddBinaryData("image", bytes, "screenShot.jpg", "image/jpg");
+        status.text = "binary data added";
+
+        WWW w = new WWW(url, form);
+        yield return w;
+        status.text = "dataextracted";
+        Debug.Log("data" + w.text);
+        apiData.text = "API Data" + w.text;
+
+
+
         // Debug.Log("request");
         // WWW request = new WWW(url);
         // StartCoroutine(onResponse(request));
 
-        byte[] bytes = tex.EncodeToJPG();
+
         // Debug.Log(bytes.To);
         // Debug.Log(tex);
 
         // string path = Application.persistentDataPath + "/Image" + System.DateTime.Now.ToString("HHmmss") + ".jpg";
         // File.WriteAllBytes(path, bytes);
         // Debug.Log(path);
-        Destroy(tex);
+        
 
                 // var uwr = new UnityWebRequest(url, "POST");
                 // uwr.uploadHandler = new UploadHandlerRaw(bytes);
@@ -92,16 +108,11 @@ public class MainScript : MonoBehaviour
 
             // Create a Web Form
 
-        var form = new WWWForm();
+        
         // form.AddField("frameCount", Time.frameCount.ToString());
-        form.AddBinaryData("image", bytes, "screenShot.jpg", "image/jpg");
-        status.text = "binary data added";
+        
         // Upload to a cgi script    
-        WWW w = new WWW(url, form);
-        yield return w;
-        status.text = "dataextracted";
-        Debug.Log("data" + w.text);
-        apiData.text = "API Data" + w.text;
+        
         // Debug.Log(w.bytes);
         // if (w.error != null)
         //     print(w.error);    
@@ -111,14 +122,6 @@ public class MainScript : MonoBehaviour
         // yield return null;
 
     }
-
-    // private IEnumerator onResponse(WWW req)
-    // {
-    //     yield return req;
-
-    //     Debug.Log(req.text);
-
-    // }
 
     IEnumerator captureImage()
     {
