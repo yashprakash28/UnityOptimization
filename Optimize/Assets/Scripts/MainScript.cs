@@ -14,6 +14,8 @@ public class MainScript : MonoBehaviour
 
     static WebCamTexture camera;
 
+    public GameObject skullPrefab;
+
     public TextMeshProUGUI apiData, countdown, status;
 
     private const float API_CHECK_MAXTIME = 0.05f * 60.0f; //3 second
@@ -21,17 +23,18 @@ public class MainScript : MonoBehaviour
 
     void Start()
     {
-        // if (camera == null)
-        // {
-        //     camera = new WebCamTexture();
-        // }
+        if (camera == null)
+        {
+            camera = new WebCamTexture();
+        }
 
-        // GetComponent<Renderer>().material.mainTexture = camera;
+        GetComponent<Renderer>().material.mainTexture = camera;
 
-        // if(!camera.isPlaying)
-        // {
-        //     camera.Play();
-        // }
+        if(!camera.isPlaying)
+        {
+            camera.Play();
+        }
+        // Instantiate(skullPrefab, new Vector3(0, 0, 0), Quaternion.identity);
     }
 
     void Update()
@@ -53,7 +56,7 @@ public class MainScript : MonoBehaviour
 
     IEnumerator request(Texture2D tex)
     {
-        
+
         Debug.Log("sending request");
         status.text = "sending request";
         byte[] bytes = tex.EncodeToJPG();
@@ -69,12 +72,23 @@ public class MainScript : MonoBehaviour
         Debug.Log("data" + w.text);
         apiData.text = "API Data" + w.text;
 
+        skullPrefab.transform.localPosition = new Vector3(1,1,1);
+        skullPrefab.transform.localScale = new Vector3(1,1,1);
 
+        // topLeftCorner --> TLx, TLy;
+        // bottomRightCorner --> BRx, BRy;
+
+        // center --> cx, cy;
+
+        // cx = (tlx+brx)/2;
+        // cy = (tly+bry)/2;
+
+        // topRightCorner --> TRx, TRy;
+        // bottomLeftCorner --> BLx, BLy;
 
         // Debug.Log("request");
         // WWW request = new WWW(url);
         // StartCoroutine(onResponse(request));
-
 
         // Debug.Log(bytes.To);
         // Debug.Log(tex);
