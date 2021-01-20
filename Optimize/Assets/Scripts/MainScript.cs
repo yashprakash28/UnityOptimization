@@ -72,16 +72,26 @@ public class MainScript : MonoBehaviour
         Debug.Log("data" + w.text);
         apiData.text = "API Data" + w.text;
 
-        skullPrefab.transform.localPosition = new Vector3(1,1,1);
-        skullPrefab.transform.localScale = new Vector3(1,1,1);
+        string[] separatedData = w.text.Split( new char [] {'[', '[', ']', ']'} );  
+        // Debug.Log(separatedData[2] + "---" + separatedData[6]);
 
-        // topLeftCorner --> TLx, TLy;
-        // bottomRightCorner --> BRx, BRy;
+        string[] topLeftCorner = separatedData[2].Split(',');
+        string[] bottomRightCorner = separatedData[6].Split(',');
 
-        // center --> cx, cy;
+        // Debug.Log(topLeftCorner[0] + " " + topLeftCorner[1] + " " + bottomRightCorner[0] + " " + bottomRightCorner[1]);
 
-        // cx = (tlx+brx)/2;
-        // cy = (tly+bry)/2;
+        float TLx = float.Parse(topLeftCorner[0]);
+        float TLy = float.Parse(topLeftCorner[1]);
+
+        float BRx = float.Parse(bottomRightCorner[0]);
+        float BRy = float.Parse(bottomRightCorner[1]);
+
+        float cx = (TLx+BRx)/2;
+        float cy = (TLy+BRy)/2;
+
+        skullPrefab.transform.localPosition = new Vector2(cx,cy);
+        // skullPrefab.transform.localScale = new Vector3(1,1,1);
+
 
         // topRightCorner --> TRx, TRy;
         // bottomLeftCorner --> BLx, BLy;
