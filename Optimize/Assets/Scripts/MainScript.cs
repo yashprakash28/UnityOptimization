@@ -14,11 +14,13 @@ public class MainScript : MonoBehaviour
 
     static WebCamTexture camera;
 
+    public Camera cam;
+
     public GameObject skullPrefab;
 
     public TextMeshProUGUI apiData, countdown, status;
 
-    private const float API_CHECK_MAXTIME = 0.05f * 60.0f; //3 second
+    private const float API_CHECK_MAXTIME = 60.0f / 60.0f; //3 second
     private float apiCheckCountdown = API_CHECK_MAXTIME;
 
     void Start()
@@ -80,16 +82,20 @@ public class MainScript : MonoBehaviour
 
         // Debug.Log(topLeftCorner[0] + " " + topLeftCorner[1] + " " + bottomRightCorner[0] + " " + bottomRightCorner[1]);
 
-        float TLx = float.Parse(topLeftCorner[0]);
-        float TLy = float.Parse(topLeftCorner[1]);
+        float TLx = float.Parse(topLeftCorner[0]);// - 405f;
+        float TLy = float.Parse(topLeftCorner[1]);// - 770f;
 
-        float BRx = float.Parse(bottomRightCorner[0]);
-        float BRy = float.Parse(bottomRightCorner[1]);
+        float BRx = float.Parse(bottomRightCorner[0]);// - 667f;
+        float BRy = float.Parse(bottomRightCorner[1]);// - 1287f;
 
         float cx = (TLx+BRx)/2;
         float cy = (TLy+BRy)/2;
 
-        skullPrefab.transform.localPosition = new Vector2(cx,cy);
+        Vector3 point = new Vector3();
+
+        point = cam.ScreenToWorldPoint(new Vector3(cx, -cy, 10f));
+
+        skullPrefab.transform.localPosition = point;
         // skullPrefab.transform.localScale = new Vector3(1,1,1);
 
 

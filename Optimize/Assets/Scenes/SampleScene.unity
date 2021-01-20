@@ -303,14 +303,14 @@ RectTransform:
   m_GameObject: {fileID: 368035097}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.5633, y: 1.5633, z: 1.5633}
+  m_LocalScale: {x: 2.4335892, y: 2.4335892, z: 2.4335892}
   m_Children: []
   m_Father: {fileID: 1848925975}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -37, y: -216}
+  m_AnchoredPosition: {x: -182, y: -870}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &368035099
@@ -458,14 +458,14 @@ RectTransform:
   m_GameObject: {fileID: 371613229}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.5633, y: 1.5633, z: 1.5633}
+  m_LocalScale: {x: 2.4335892, y: 2.4335892, z: 2.4335892}
   m_Children: []
   m_Father: {fileID: 1848925975}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -37, y: -93}
+  m_AnchoredPosition: {x: -182, y: -747}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &371613231
@@ -871,7 +871,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1566857408
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -884,6 +884,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 02c8e41b92a889645ad662814bf2d441, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cam: {fileID: 1974918946}
   skullPrefab: {fileID: 1358405457890865589}
   apiData: {fileID: 1802757180}
   countdown: {fileID: 368035099}
@@ -957,8 +958,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1566857407}
   m_LocalRotation: {x: 0, y: -0.7071068, z: 0.70710677, w: 0}
-  m_LocalPosition: {x: 0, y: 0, z: 5.77}
-  m_LocalScale: {x: 0.56515, y: 0.56515, z: 0.56515}
+  m_LocalPosition: {x: 0, y: 0, z: 10}
+  m_LocalScale: {x: 0.6492917, y: 0.56515, z: 1.1460503}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 5
@@ -1056,14 +1057,14 @@ RectTransform:
   m_GameObject: {fileID: 1802757178}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.5633, y: 1.5633, z: 1.5633}
+  m_LocalScale: {x: 2.4335892, y: 2.4335892, z: 2.4335892}
   m_Children: []
   m_Father: {fileID: 1848925975}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -37, y: -158}
+  m_AnchoredPosition: {x: -182, y: -812}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1802757180
@@ -1294,13 +1295,13 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1848925971}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 02c8e41b92a889645ad662814bf2d441, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skullPrefab: {fileID: 283151959625874928, guid: f1e74bc073660b842a9c2232292bf7dd,
-    type: 3}
+  cam: {fileID: 1974918946}
+  skullPrefab: {fileID: 1358405457890865589}
   apiData: {fileID: 1802757180}
   countdown: {fileID: 368035099}
   status: {fileID: 371613231}
@@ -1415,7 +1416,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1974918945}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -0.87}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 596012097}
@@ -1615,7 +1616,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &2438400335632677793
 Transform:
   m_ObjectHideFlags: 0
@@ -1638,7 +1639,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1358405457890865589}
   m_LocalRotation: {x: 0.00000013240823, y: 0.7071068, z: 0.7071068, w: -0.00000013240823}
-  m_LocalPosition: {x: 0, y: 0.18, z: 6.58}
+  m_LocalPosition: {x: 0, y: 0, z: 10}
   m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
   m_Children:
   - {fileID: 2438400335632677793}
