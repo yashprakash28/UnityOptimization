@@ -94,7 +94,7 @@ public class MainScript : MonoBehaviour
         Vector3 point = new Vector3();
 
         point = cam.ScreenToWorldPoint(new Vector3(cx, -cy, 10f));
-
+        point += new Vector3(0f, 12f, 0f);
         skullPrefab.transform.localPosition = point;
         // skullPrefab.transform.localScale = new Vector3(1,1,1);
 
